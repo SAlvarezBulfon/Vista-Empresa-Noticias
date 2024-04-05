@@ -1,0 +1,16 @@
+{
+  "name": "frontempresanoticia",
+  "version": "1.0.0",
+  "description": "Frontend para el manejo de empresas y noticias",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Sophia Alvarez",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2"
+  }
+}

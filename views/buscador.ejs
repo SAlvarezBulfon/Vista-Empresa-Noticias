@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <title>Resultados de Búsqueda</title>
+
+    <!-- CSS de Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <!-- Links -->
+    <link rel="stylesheet" href="css/search.css" />
+    <!--JS-->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/rd-smoothscroll.min.js"></script>
+  </head>
+
+  <body>
+    <div class="page">
+      <!-- Encabezado -->
+      <header>
+        <div class="container top-sect">
+          <div class="navbar-header">
+            <h1 class="navbar-brand">
+              <a data-type="rd-navbar-brand" href="/"
+                ><small
+                  ><br />
+                  <%= empresa.denominacion %>
+                </small></a
+              >
+            </h1>
+            <a class="search-form_toggle" href="/"></a>
+          </div>
+
+          <div class="help-box text-right">
+            <p>Telefono</p>
+            <a href="callto:#"> <%= empresa.telefono %> </a>
+            <small
+              ><span>Horario:</span>
+              <%= empresa.horarioAtencion %>
+            </small>
+          </div>
+        </div>
+
+        <div id="stuck_container" class="stuck_container">
+          <div class="container">
+            <nav class="navbar navbar-default navbar-static-top pull-left">
+              <div class="">
+                <ul class="nav" data-type="navbar">
+                  <li style="list-style: none" class="active">
+                    <a href="/empresa/<%= empresa.id %>">INICIO</a>
+                  </li>
+                  <li style="list-style: none">
+                    <a href="/">LISTA EMPRESAS</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <form
+              class="search-form"
+              action="/buscar"
+              method="GET"
+              accept-charset="utf-8"
+            >
+              <input type="hidden" name="empresaId" value="<%= empresa.id %>" />
+              <label class="search-form_label">
+                <input
+                  class="search-form_input"
+                  type="text"
+                  name="buscar"
+                  autocomplete="off"
+                  placeholder="Ingrese Texto"
+                />
+                <span class="search-form_liveout"></span>
+              </label>
+              <button
+                class="search-form_submit fa-search"
+                type="submit"
+              ></button>
+            </form>
+          </div>
+        </div>
+      </header>
+
+      <!-- Contenido principal -->
+      <main>
+		<section class="well well4">
+		  <div class="container">
+			<h2 class="mb-4">Resultados de búsqueda para: <%= keyword %></h2>
+	  
+			<% if (noticias.length > 0) { %>
+			  <div class="row offs2">
+				<% noticias.forEach(noticia => { %>
+				  <table width="90%" align="center">
+					<tbody>
+					  <tr>
+						<td>
+						  <a href="/noticia/<%= noticia.id %>">
+							<img
+							  width="250px"
+							  class="imgNoticia"
+							  src="<%= noticia.imagenNoticia %>"
+							  alt=""
+							/>
+						  </a>
+						</td>
+						<td width="25"></td>
+						<td style="text-align: justify" valign="top">
+						  <a
+							style="text-align: justify; font-size: 20px"
+							href="/noticia/<%= noticia.id %>"
+							class="banner"
+						  >
+							<%= noticia.tituloNoticia %>
+						  </a>
+						  <div class="verOcultar">
+							<%= noticia.resumenNoticia %><a
+							  href="/noticia/<%= noticia.id %>"
+							  style="color: blue"
+							>
+							  Leer Más - <%= noticia.fechaPublicacion %>
+							</a>
+						  </div>
+						</td>
+					  </tr>
+					</tbody>
+				  </table>
+				  <hr />
+				<% }) %>
+			  </div>
+			<% } else { %>
+			  <div class="alert alert-warning" role="alert">
+				No se encontraron resultados disponibles.
+			  </div>
+			<% } %>
+	  
+		  </div>
+		</section>
+	  </main>
+	  
+
+      <!-- Pie de página -->
+      <footer>
+        <section class="well">
+          <div class="container">
+            <p class="rights">
+              Derechos de autor © <span id="copyright-year"></span>
+              <a href="index-5.html">Política de Privacidad</a>
+            </p>
+          </div>
+        </section>
+      </footer>
+    </div>
+
+    <!-- JS de Bootstrap (opcional, pero necesario para ciertas características como el carrusel) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

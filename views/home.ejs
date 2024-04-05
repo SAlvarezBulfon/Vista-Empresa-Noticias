@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <title>HOME</title>
+  <!-- CSS de Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <!-- Bootstrap -->
+  <link href="/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Links -->
+  <link rel="stylesheet" href="/css/camera.css">
+  <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/google-map.css">
+
+
+  <!--JS-->
+  <script src="/js/jquery.js"></script>
+  <script src="/js/jquery-migrate-1.2.1.min.js"></script>
+  <script src="/js/rd-smoothscroll.min.js"></script>
+
+
+</head>
+
+<body>
+
+  <div class="page">
+    <!--========================================================
+                            HEADER
+  =========================================================-->
+    <header>
+      <div class="container top-sect">
+        <div class="navbar-header">
+          <h1 class="navbar-brand" style="text-decoration: none;">
+            <a data-type='rd-navbar-brand' href="/"><small><br>
+                <%= empresa.denominacion %>
+              </small></a>
+          </h1>
+          <a class="search-form_toggle" href="/"></a>
+        </div>
+
+        <div class="help-box text-right">
+          <p>Telefono</p>
+          <a href="callto:#">
+            <%= empresa.telefono %>
+          </a>
+          <small><span>Horario: </span>
+            <%= empresa.horarioAtencion %>
+          </small>
+        </div>
+      </div>
+      <div id="stuck_container" class="stuck_container">
+        <div class="container">
+          <nav class="navbar navbar-default navbar-static-top pull-left">
+            <div class="">
+              <ul class="nav" data-type="navbar">
+                <li style="list-style: none;" class="active">
+                  <a href="/empresa/<%= empresa.id %>">INICIO</a>
+                </li>
+                <li style="list-style: none;">
+                  <a href="/">LISTA EMPRESAS</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <form class="search-form" action="/buscar" method="GET" accept-charset="utf-8">
+            <input type="hidden" name="empresaId" value="<%= empresa.id %>">
+            <label class="search-form_label">
+                <input class="search-form_input" type="text" name="buscar" autocomplete="off" placeholder="Ingrese Texto">
+                <span class="search-form_liveout"></span>
+            </label>
+            <button class="search-form_submit fa-search" type="submit"></button>
+        </form>
+        
+
+        </div>
+
+      </div>
+
+    </header>
+
+    <!--========================================================
+                            CONTENT
+  =========================================================-->
+
+    <main>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <% noticias.forEach((noticia, index) => { %>
+          <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>"
+            class="<%= index === 0 ? 'active' : '' %>"></li>
+          <% }) %>
+        </ol>
+        <div class="carousel-inner">
+          <% noticias.forEach((noticia, index) => { %>
+          <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+            <a href="/noticia/<%= noticia.id %>">
+              <img src="<%= noticia.imagenNoticia %>" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-block">
+                <h5><%= noticia.tituloNoticia %></h5>
+                <p><%= noticia.resumenNoticia %></p>
+              </div>
+            </a>
+          </div>
+          <% }) %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      
+      
+
+      <section class="well well2 wow fadeIn  bg1" data-wow-duration='3s'>
+        <div class="container">
+          <h2 class="txt-pr">
+            Quienes Somos
+          </h2>
+          <div class="row">
+            <div class="col">
+              <p style="text-align:justify">
+                <%= empresa.quienesSomos %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!--========================================================
+                            FOOTER
+  =========================================================-->
+    <footer class="top-border">
+      <section class="well well2 wow fadeIn  bg1" data-wow-duration='3s'>
+        <div class="container">
+          <h2 class="txt-pr">
+            Donde estamos
+          </h2>
+        </div>
+      </section>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11270.125646913215!2d<%= empresa.longitud %>!3d<%= empresa.latitud %>!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1615335513448!5m2!1ses-419!2sar"
+          width="1600" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+
+      <section class="well1">
+        <div class="container">
+          <p class="rights">
+            <%= empresa.denominacion %> &#169; <span id="copyright-year"></span>
+              <a href="index-5.html">Privacy Policy</a>
+              <!-- {%FOOTER_LINK} -->
+          </p>
+        </div>
+      </section>
+    </footer>
+  </div>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- JS de Bootstrap (opcional, pero necesario para ciertas características como el carrusel) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

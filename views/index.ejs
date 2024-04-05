@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Empresas</title>
+</head>
+<body>
+    <table width="50%" align="center">
+        <tr>
+            <td width="50%">
+                <b>EMPRESA</b>
+            </td>
+            <td>
+                <b>VER PAGINA</b>
+            </td>
+        </tr>
+        <% empresas.forEach(empresa => { %>
+            <tr>
+                <td>
+                    <%= empresa.denominacion %>
+                </td>
+                <td>
+                    <a href="/empresa/<%= empresa.id %>">VER PAGINA</a>
+                </td>                               
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>
